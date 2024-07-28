@@ -24,4 +24,9 @@ public class ToDoService {
     public List<ToDo> findAllTodos() {
         return toDoRepo.findAll();
     }
+
+    public String deleteToDo(String id) {
+        toDoRepo.deleteById(id);
+        return id;
+    }
 }
