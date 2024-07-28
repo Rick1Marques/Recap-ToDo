@@ -9,6 +9,7 @@ import org.example.recaptodo.utils.IdService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +29,14 @@ public class ToDoService {
     public String deleteToDo(String id) {
         toDoRepo.deleteById(id);
         return id;
+    }
+
+    public ToDo updateToDo(String id, ToDo modToDo) {
+            Optional<ToDo> oldToDo = toDoRepo.findById(id);
+            if(oldToDo.isPresent()){
+                ToDo updatedToDo = oldToDo.get().withDescription(modToDo.description()).withToDoStatus(modToDo.toDoStatus());
+                return toDoRepo.save(updatedToDo);
+            }
+        return null;
     }
 }
