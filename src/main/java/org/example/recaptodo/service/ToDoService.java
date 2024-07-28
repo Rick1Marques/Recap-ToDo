@@ -7,6 +7,8 @@ import org.example.recaptodo.model.ToDoDto;
 import org.example.recaptodo.model.ToDoStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ToDoService {
@@ -16,5 +18,9 @@ public class ToDoService {
     public ToDo addToDo(ToDoDto toDoDto) {
         ToDo newToDo = new ToDo(toDoDto.description(), ToDoStatus.OPEN);
         return toDoRepo.save(newToDo);
+    }
+
+    public List<ToDo> findAllTodos() {
+        return toDoRepo.findAll();
     }
 }
