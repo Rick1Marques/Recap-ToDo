@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.recaptodo.model.ToDo;
 import org.example.recaptodo.model.ToDoDto;
 import org.example.recaptodo.service.ToDoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
@@ -15,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ToDoController {
 
     private final ToDoService toDoService;
+
+    @GetMapping
+    public List<ToDo> getAllToDos(){
+        return toDoService.findAllTodos();
+    }
 
     @PostMapping
     public ToDo postToDo(@RequestBody ToDoDto toDoDto){
