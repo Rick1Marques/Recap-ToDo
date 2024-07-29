@@ -26,7 +26,7 @@ public class ToDoService {
     @Value("${app.openai-api-key}")
     private String openAIApiKey;
 
-    private RestClient restClient = RestClient.builder()
+    private final RestClient restClient = RestClient.builder()
             .baseUrl("https://api.openai.com/v1/chat/completions")
             .defaultHeader("Authorization", "Bearer "+ openAIApiKey)
             .build();
