@@ -34,4 +34,9 @@ public class ToDoController {
     public ToDo putToDo(@PathVariable String id, @RequestBody ToDo modToDo){
         return toDoService.updateToDo(id, modToDo);
     }
+
+    @PostMapping("/generator")
+    public String getToDoList(@RequestBody String theme) {
+        return toDoService.getToDoList(theme);
+    }
 }

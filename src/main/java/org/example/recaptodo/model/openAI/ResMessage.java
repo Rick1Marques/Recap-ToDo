@@ -5,5 +5,5 @@ package org.example.recaptodo.model.openAI;
 //                                "content": "\n\nThis is a test!"
 //                                 },
 
-public record resMessage(String role, String content) {
+public record ResMessage(String role, String content) {
 }
