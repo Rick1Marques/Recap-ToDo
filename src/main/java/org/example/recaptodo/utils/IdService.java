@@ -1,10 +1,13 @@
 package org.example.recaptodo.utils;
 
+import org.springframework.stereotype.Service;
+
 import java.util.UUID;
 
+@Service
 public class IdService {
 
-    public static String randomId(){
+    public String randomId(){
         return UUID.randomUUID().toString();
     }
 }
