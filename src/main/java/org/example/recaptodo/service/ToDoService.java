@@ -24,11 +24,11 @@ public class ToDoService {
     private final ToDoRepo toDoRepo;
 
     @Value("${app.openai-api-key}")
-    private String openAIApiKey;
+    private String OPENAI_API_KEY;
 
     private final RestClient restClient = RestClient.builder()
             .baseUrl("https://api.openai.com/v1/chat/completions")
-            .defaultHeader("Authorization", "Bearer "+ openAIApiKey)
+            .defaultHeader("Authorization", "Bearer "+ OPENAI_API_KEY)
             .build();
 
     public ToDo addToDo(ToDoDto toDoDto) {
@@ -59,7 +59,7 @@ public class ToDoService {
                 List.of(new Message("user", textReq)),
                 0.7);
 
-        OpenAIResponse response = restClient.put()
+        OpenAIResponse response = restClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(request)
                 .retrieve()
