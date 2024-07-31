@@ -63,4 +63,29 @@ public class ToDoIntegrationTest {
         mvc.perform(MockMvcRequestBuilders.delete("/api/todo/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @Test
+    @DirtiesContext
+    void putToDo()throws Exception {
+        toDoRepo.save(new ToDo("1", "testing", ToDoStatus.OPEN));
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/todo/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                {
+                "id": "1",
+                "description": "testingPut",
+                "toDoStatus": "OPEN"
+                }
+"""
+                ))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                {
+                "id": "1",
+                "description": "testingPut",
+                "toDoStatus": "OPEN"
+                }
+"""));
+    }
 }
