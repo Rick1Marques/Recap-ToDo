@@ -23,6 +23,8 @@ public class ToDoService {
 
     private final ToDoRepo toDoRepo;
 
+    private final IdService idService;
+
     @Value("${app.openai-api-key}")
     private String OPENAI_API_KEY;
 
@@ -32,7 +34,7 @@ public class ToDoService {
             .build();
 
     public ToDo addToDo(ToDoDto toDoDto) {
-        ToDo newToDo = new ToDo(IdService.randomId(),toDoDto.description(), ToDoStatus.OPEN);
+        ToDo newToDo = new ToDo(idService.randomId(), toDoDto.description(), ToDoStatus.OPEN);
         return toDoRepo.save(newToDo);
     }
 
