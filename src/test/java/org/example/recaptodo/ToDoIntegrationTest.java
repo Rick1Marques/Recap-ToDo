@@ -1,6 +1,8 @@
 package org.example.recaptodo;
 
 import org.example.recaptodo.DB.ToDoRepo;
+import org.example.recaptodo.model.ToDo;
+import org.example.recaptodo.model.ToDoStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -55,5 +57,10 @@ public class ToDoIntegrationTest {
 
     @Test
     @DirtiesContext
-    void
+    void deleteToDo() throws Exception {
+        toDoRepo.save(new ToDo("1", "testing", ToDoStatus.OPEN));
+
+        mvc.perform(MockMvcRequestBuilders.delete("/api/todo/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }
