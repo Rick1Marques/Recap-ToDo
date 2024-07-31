@@ -74,4 +74,58 @@ class ToDoServiceTest {
 
         assertEquals(id, result);
     }
+
+    @Test
+    void updateToDo(){
+
+        String id = "123";
+        ToDo toDo = new ToDo(id, "test", ToDoStatus.OPEN);
+        ToDo modToDo = toDo.withDescription("testing").withToDoStatus(ToDoStatus.DOING);
+
+        when(mockToDoRepository.findById(id)).thenReturn(Optional.of(toDo));
+        when(mockToDoRepository.save(modToDo)).thenReturn(modToDo);
+
+        ToDoService toDoService = new ToDoService(mockToDoRepository, mockIdService);
+        ToDo result = toDoService.updateToDo(id, modToDo);
+
+        verify(mockToDoRepository).findById(id);
+        verify(mockToDoRepository).save(modToDo);
+
+        assertEquals(modToDo, result);
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
