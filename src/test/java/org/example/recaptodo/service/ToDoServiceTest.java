@@ -8,6 +8,7 @@ import org.example.recaptodo.utils.IdService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -53,5 +54,24 @@ class ToDoServiceTest {
 
         assertEquals(toDoList, result);
 
+    }
+
+    @Test
+    void deleteToDo() {
+
+        String id = "123";
+        ToDo toDo = new ToDo(id, "testing", ToDoStatus.OPEN);
+
+        when(mockToDoRepository.findById(id)).thenReturn(Optional.of(toDo));
+        doNothing().when(mockToDoRepository).deleteById(id);
+
+        ToDoService toDoService = new ToDoService(mockToDoRepository, mockIdService);
+
+        String result = toDoService.deleteToDo(id);
+
+        verify(mockToDoRepository).findById(id);
+        verify(mockToDoRepository).deleteById(id);
+
+        assertEquals(id, result);
     }
 }
