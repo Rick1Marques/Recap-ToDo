@@ -35,7 +35,7 @@ public class ToDoIntegrationTest {
 
     @Test
     @DirtiesContext
-    void  postToDo() throws Exception{
+    void postToDo() throws Exception{
         mvc.perform(MockMvcRequestBuilders.post("/api/todo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
@@ -52,4 +52,8 @@ public class ToDoIntegrationTest {
 ))
                 .andExpect(jsonPath("$.id").exists());
     }
+
+    @Test
+    @DirtiesContext
+    void
 }
